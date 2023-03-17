@@ -108,3 +108,34 @@ export const getMe = async (req, res) => {
         });
     }
 };
+
+export const update = async (req, res) => {
+    try {
+        const user = await userModel.findById(req.userId);
+
+        if (!user) {
+            res.status(404).json({
+                message: "User is not found"
+            });
+        };
+
+        await userModel.updateOne({
+            _id: user
+        }, {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            avatarUrl: req.body.avatarUrl,
+        });  
+        
+        res.json({
+            success: true
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: "Failed to update profile"
+        })
+    }
+}
