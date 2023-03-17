@@ -13,11 +13,11 @@ app.use(express.json());
 
 
 
-//user informstion
+//user information
 app.post('/auth/register', registerValidator, validationErrors, userController.register);
 app.post('/auth/login', loginValidator, validationErrors, userController.login);
-app.get('/auth/me', checkAuth, userController.getMe);
-app.patch('/auth/update', checkAuth, userController.update);
+app.get('/users/me', checkAuth, userController.getMe);
+app.patch('/users/update', checkAuth, userController.update);
 
 
 
