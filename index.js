@@ -18,6 +18,7 @@ app.post('/auth/register', registerValidator, validationErrors, userController.r
 app.post('/auth/login', loginValidator, validationErrors, userController.login);
 app.get('/users/me', checkAuth, userController.getMe);
 app.patch('/users/update', checkAuth, userController.update);
+app.delete('/users/delete', checkAuth, userController.deleteUser);
 
 
 
