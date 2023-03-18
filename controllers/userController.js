@@ -138,4 +138,32 @@ export const update = async (req, res) => {
             message: "Failed to update profile"
         })
     }
-}
+};
+
+export const deleteUser = async (req, res) => {
+    try {
+        const userId = await userModel.findById(req.userId);
+
+        await userModel.findOneAndDelete(
+            {
+                _id: userId
+            },
+        ).then (userd => {
+            if(!userd) {
+                return res.status(404).json({
+                    message: "User is not found"
+                });
+            };
+        }) 
+
+        res.json({
+            success: true
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: "Failed to delete user"
+        });
+    }
+};
