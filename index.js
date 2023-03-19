@@ -1,8 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
 
-import { userController } from "./controllers/index.js";
-import { registerValidator, loginValidator } from "./validations.js";
+import { userController, projectController } from "./controllers/index.js";
+import { registerValidator, loginValidator, projectValidator } from "./validations.js";
 import { validationErrors, checkAuth } from "./utils/index.js";
 
 mongoose.set('strictQuery', false);
@@ -19,6 +19,11 @@ app.post('/auth/login', loginValidator, validationErrors, userController.login);
 app.get('/users/me', checkAuth, userController.getMe);
 app.patch('/users/update', checkAuth, userController.update);
 app.delete('/users/delete', checkAuth, userController.deleteUser);
+
+
+
+//routers for project actions
+app.post('/projects/create', checkAuth, projectValidator, projectController.create);
 
 
 
