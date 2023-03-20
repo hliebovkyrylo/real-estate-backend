@@ -16,6 +16,10 @@ const projectSchema = new mongoose.Schema({
     propertyType: {
         type: String,
     },
+    poster: {
+        type: String,
+        required: true,
+    },
     firstName: {
         type: String,
         required: true,
@@ -26,10 +30,12 @@ const projectSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true,
     },
     phoneNumber: {
         type: String,
+        unique: true,
     },
     avatarUrl: {
         type: String,

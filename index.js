@@ -23,7 +23,8 @@ app.delete('/users/delete', checkAuth, userController.deleteUser);
 
 
 //routers for project actions
-app.post('/projects/create', checkAuth, projectValidator, projectController.create);
+app.post('/projects/create', checkAuth, projectValidator, validationErrors, projectController.create);
+app.patch('/projects/:id', checkAuth, projectValidator, validationErrors, projectController.updateProject);
 
 
 
