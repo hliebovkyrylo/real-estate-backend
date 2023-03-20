@@ -76,3 +76,29 @@ export const updateProject = async (req, res) => {
         });
     }
 };
+
+export const getOneProject = async (req, res) => {
+    try {
+        const projectId = req.params.id;
+        
+        await projectModel.findOne(
+            {
+                _id: projectId
+            },
+        ).then(proj => {
+            if (!proj) {
+                return res.status(404).json({
+                    message: "Project is not found"
+                });
+            }
+
+            res.json(proj);
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: "Failed to get project"
+        });
+    }
+};
