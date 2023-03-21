@@ -102,3 +102,17 @@ export const getOneProject = async (req, res) => {
         });
     }
 };
+
+export const getAllProjects = async (req, res) => {
+    try {
+        const projects = await projectModel.find().populate('email').exec();
+
+        res.json(projects);
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: "Failed to get projects"
+        });
+    }
+};

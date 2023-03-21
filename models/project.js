@@ -31,7 +31,8 @@ const projectSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        unique: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
     },
     phoneNumber: {
         type: String,

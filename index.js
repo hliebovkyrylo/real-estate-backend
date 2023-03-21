@@ -26,6 +26,7 @@ app.delete('/users/delete', checkAuth, userController.deleteUser);
 app.post('/projects/create', checkAuth, projectValidator, validationErrors, projectController.create);
 app.patch('/projects/:id', checkAuth, projectValidator, validationErrors, projectController.updateProject);
 app.get('/projects/:id', checkAuth, projectController.getOneProject);
+app.get('/projects', checkAuth, projectController.getAllProjects);
 
 
 
