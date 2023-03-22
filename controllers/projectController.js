@@ -116,3 +116,31 @@ export const getAllProjects = async (req, res) => {
         });
     }
 };
+
+export const deleteProject = async (req, res) => {
+    try {
+        const projectId = req.params.id;
+
+        await projectModel.findOneAndDelete(
+            {
+                _id: projectId
+            },
+        ).then(proj => {
+            if (!proj) {
+                return res.status(404).json({
+                    message: "Project is not found"
+                });
+            }
+        });
+
+        res.json({
+            success: "true"
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: "Failed to delete project"
+        });
+    }
+};
