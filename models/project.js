@@ -15,6 +15,7 @@ const projectSchema = new mongoose.Schema({
     },
     propertyType: {
         type: String,
+        required: true
     },
     poster: {
         type: String,
@@ -43,18 +44,23 @@ const projectSchema = new mongoose.Schema({
     },
     acceptedCurrencies: {
         type: String,
+        required: true
     },
     size: {
         type: String,
+        required: true
     },
     bedrooms: {
         type: String,
+        required: true
     },
     rathrooms: {
         type: String,
+        required: true
     },
     yearBuilt: {
         type: String,
+        required: true
     },
     floors: {
         type: String,
