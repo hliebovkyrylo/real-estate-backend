@@ -5,6 +5,9 @@ import { userController, projectController } from "./controllers/index.js";
 import { registerValidator, loginValidator, projectValidator } from "./validations.js";
 import { validationErrors, checkAuth } from "./utils/index.js";
 
+import cors from "cors";
+import multer from "multer";
+
 mongoose.set('strictQuery', false);
 mongoose.connect('mongodb+srv://testestest:123qwe456@cluster3.poofvsm.mongodb.net/?retryWrites=true&w=majority').then(console.log('DB connected')).catch((err) => {console.log('DB error', err);})
 
@@ -28,6 +31,28 @@ app.patch('/projects/:id', checkAuth, projectValidator, validationErrors, projec
 app.get('/projects/:id', checkAuth, projectController.getOneProject);
 app.get('/projects', checkAuth, projectController.getAllProjects);
 app.delete('/projects/:id', checkAuth, projectController.deleteProject);
+
+//upload image
+
+app.use(cors());
+app.use('/uploadImg', express.static('uploadImg'));
+
+const storage = multer.diskStorage({
+    destination: (_, __, callback) => {
+        callback(null, 'uploadImg');
+    },
+    filename: (_, file, callback) => {
+        callback(null, file.originalname);
+    }
+});
+
+const upload = multer({ storage });
+
+app.post('/uploadImage', checkAuth, upload.single('image'), (req, res) => {
+    res.json({
+        url: `/uploadImage/${req.file.originalname}`
+    });
+});
 
 
 
