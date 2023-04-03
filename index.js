@@ -13,6 +13,7 @@ mongoose.connect('mongodb+srv://testestest:123qwe456@cluster3.poofvsm.mongodb.ne
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 
 
@@ -26,15 +27,14 @@ app.delete('/users/delete', checkAuth, userController.deleteUser);
 
 
 //routers for project actions
-app.post('/projects/create', checkAuth, projectValidator, validationErrors, projectController.create);
+app.post('/projects/:id/edit', checkAuth, projectValidator, validationErrors, projectController.create);
 app.patch('/projects/:id', checkAuth, projectValidator, validationErrors, projectController.updateProject);
 app.get('/projects/:id', checkAuth, projectController.getOneProject);
-app.get('/projects', checkAuth, projectController.getAllProjects);
+app.get('/home', projectController.getAllProjects);
 app.delete('/projects/:id', checkAuth, projectController.deleteProject);
 
 //upload image
 
-app.use(cors());
 app.use('/uploadImg', express.static('uploadImg'));
 
 const storage = multer.diskStorage({
