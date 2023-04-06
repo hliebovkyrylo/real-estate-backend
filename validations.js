@@ -26,7 +26,7 @@ export const projectValidator = [
     body('acceptedCurrencies', 'Error').isString(),
     body('size', 'Error').isString(),
     body('bedrooms', 'Error').isString(),
-    body('rathrooms', 'Error').isString(),
+    body('bathrooms', 'Error').isString(),
     body('yearBuilt', 'Error').isLength({ max: 4 }),
     body('floors', 'Error').isString(),
     body('description', 'Error').isString(),

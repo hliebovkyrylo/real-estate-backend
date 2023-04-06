@@ -15,7 +15,7 @@ const projectSchema = new mongoose.Schema({
   size: String,
   bedrooms: String,
   bathrooms: String,
-  yearBuilt: Date,
+  yearBuilt: Number,
   floors: String,
   description: String,
   videoLink: String,
