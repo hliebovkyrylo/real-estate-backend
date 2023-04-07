@@ -1,6 +1,8 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+
 import userModel from "../models/user.js";
+import project from "../models/project.js";
 
 export const register = async (req, res) => {
     try {
@@ -164,6 +166,21 @@ export const deleteUser = async (req, res) => {
         console.log(error);
         res.status(500).json({
             message: "Failed to delete user"
+        });
+    }
+};
+
+export const getAllUserProjects = async (req, res) => {
+    try {
+        const userId = await userModel.findById(req.userId);
+        const projects = await project.find({ user: userId });
+
+        res.json(projects);
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: "Failed to get projects"
         });
     }
 };
