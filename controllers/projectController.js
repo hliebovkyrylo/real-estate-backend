@@ -6,21 +6,17 @@ export const create = async (req, res) => {
             address: req.body.address,
             price: req.body.price,
             neighbourhood: req.body.neighbourhood,
-            propertyType: req.propertyType,
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            email: req.body.email,
-            phoneNumber: req.body.email,
-            avatarUrl: req.body.avatarUrl,
+            propertyType: req.body.propertyType,
             acceptedCurrencies: req.body.acceptedCurrencies,
             size: req.body.size,
             bedrooms: req.body.bedrooms,
-            rathrooms: req.body.rathrooms,
+            bathrooms: req.body.bathrooms,
             yearBuilt: req.body.yearBuilt,
             floors: req.body.floors,
             description: req.body.description,
             videoLink: req.body.videoLink,
-            poster: req.body.poster
+            poster: req.body.poster,
+            user: req.userId
         });
 
         const project = await doc.save();
@@ -48,20 +44,15 @@ export const updateProject = async (req, res) => {
                 price: req.body.price,
                 neighbourhood: req.body.neighbourhood,
                 propertyType: req.propertyType,
-                firstName: req.body.firstName,
-                lastName: req.body.lastName,
-                email: req.body.email,
-                phoneNumber: req.body.email,
-                avatarUrl: req.body.avatarUrl,
                 acceptedCurrencies: req.body.acceptedCurrencies,
                 size: req.body.size,
                 bedrooms: req.body.bedrooms,
-                rathrooms: req.body.rathrooms,
+                bathrooms: req.body.bathrooms,
                 yearBuilt: req.body.yearBuilt,
                 floors: req.body.floors,
                 description: req.body.description,
                 videoLink: req.body.videoLink,
-                poster: req.body.poster
+                poster: req.body.poster,
             },
         );
 
@@ -85,7 +76,7 @@ export const getOneProject = async (req, res) => {
             {
                 _id: projectId
             },
-        ).then(proj => {
+        ).populate('user').then(proj => {
             if (!proj) {
                 return res.status(404).json({
                     message: "Project is not found"
@@ -105,7 +96,7 @@ export const getOneProject = async (req, res) => {
 
 export const getAllProjects = async (req, res) => {
     try {
-        const projects = await projectModel.find().populate('email').exec();
+        const projects = await projectModel.find().populate('user').exec();
 
         res.json(projects);
 

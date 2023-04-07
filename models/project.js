@@ -21,27 +21,6 @@ const projectSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    firstName: {
-        type: String,
-        required: true,
-    },
-    lastName: {
-        type: String,
-        required: true,
-    },
-    email: {
-        type: String,
-        required: true,
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-    },
-    phoneNumber: {
-        type: String,
-        unique: true,
-    },
-    avatarUrl: {
-        type: String,
-    },
     acceptedCurrencies: {
         type: String,
         required: true
@@ -54,7 +33,7 @@ const projectSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    rathrooms: {
+    bathrooms: {
         type: String,
         required: true
     },
@@ -72,6 +51,11 @@ const projectSchema = new mongoose.Schema({
     videoLink: {
         type: String,
     },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    }
 });
 
 export default mongoose.model('Project', projectSchema);
