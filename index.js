@@ -23,7 +23,7 @@ app.post('/auth/login', loginValidator, validationErrors, userController.login);
 app.get('/users/me', checkAuth, userController.getMe);
 app.patch('/users/update', checkAuth, userController.update);
 app.delete('/users/delete', checkAuth, userController.deleteUser);
-app.get('/qaqaqa', checkAuth, userController.getAllUserProjects);
+app.get('/myProjects', checkAuth, userController.getAllUserProjects);
 
 
 
