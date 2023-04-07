@@ -27,7 +27,7 @@ app.delete('/users/delete', checkAuth, userController.deleteUser);
 
 
 //routers for project actions
-app.post('/projects', checkAuth, projectValidator, validationErrors, projectController.create);
+app.post('/projects/create', checkAuth, projectValidator, validationErrors, projectController.create);
 app.patch('/projects/:id', checkAuth, projectValidator, validationErrors, projectController.updateProject);
 app.get('/projects/:id', projectController.getOneProject);
 app.get('/home', projectController.getAllProjects);

@@ -1,24 +1,61 @@
 import mongoose from "mongoose";
 
 const projectSchema = new mongoose.Schema({
-  address: String,
-  price: Number,
-  neighbourhood: String,
-  propertyType: String,
-  poster: String,
-  firstName: String,
-  lastName: String,
-  email: String,
-  phoneNumber: String,
-  avatarUrl: String,
-  acceptedCurrencies: String,
-  size: String,
-  bedrooms: String,
-  bathrooms: String,
-  yearBuilt: Number,
-  floors: String,
-  description: String,
-  videoLink: String,
+    address: {
+        type: String,
+        required: true,
+    },
+    price: {
+        type: String,
+        required: true,
+    },
+    neighbourhood: {
+        type: String,
+        required: true,
+    },
+    propertyType: {
+        type: String,
+        required: true
+    },
+    poster: {
+        type: String,
+        required: true,
+    },
+    acceptedCurrencies: {
+        type: String,
+        required: true
+    },
+    size: {
+        type: String,
+        required: true
+    },
+    bedrooms: {
+        type: String,
+        required: true
+    },
+    bathrooms: {
+        type: String,
+        required: true
+    },
+    yearBuilt: {
+        type: String,
+        required: true
+    },
+    floors: {
+        type: String,
+    },
+    description: {
+        type: String,
+        required: true,
+    },
+    videoLink: {
+        type: String,
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    }
 });
 
 export default mongoose.model('Project', projectSchema);
