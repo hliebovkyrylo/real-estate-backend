@@ -26,5 +26,5 @@ export const projectValidator = [
     body('floors', 'Error').isString(),
     body('description', 'Error').isString(),
     body('videoLink', 'Error').isString(),
-    body('poster', 'Photo upload error').isURL(),
+    body('poster', 'Photo upload error').isString(),
 ];

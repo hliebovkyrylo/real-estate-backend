@@ -16,7 +16,8 @@ export const create = async (req, res) => {
             description: req.body.description,
             videoLink: req.body.videoLink,
             poster: req.body.poster,
-            user: req.userId
+            user: req.userId,
+            projectsName: req.body.projectsName
         });
 
         const project = await doc.save();
@@ -53,6 +54,7 @@ export const updateProject = async (req, res) => {
                 description: req.body.description,
                 videoLink: req.body.videoLink,
                 poster: req.body.poster,
+                projectsName: req.body.projectsName
             },
         );
 

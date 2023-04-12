@@ -19,7 +19,6 @@ const projectSchema = new mongoose.Schema({
     },
     poster: {
         type: String,
-        required: true,
     },
     acceptedCurrencies: {
         type: String,
@@ -51,11 +50,19 @@ const projectSchema = new mongoose.Schema({
     videoLink: {
         type: String,
     },
+    projectsName: {
+        type: String,
+        required: true
+    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
     }
-});
+},
+{
+    timestamps: true
+},
+);
 
 export default mongoose.model('Project', projectSchema);

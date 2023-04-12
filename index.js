@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 
 import { userController, projectController } from "./controllers/index.js";
 import { registerValidator, loginValidator, projectValidator } from "./validations.js";
-import { validationErrors, checkAuth } from "./utils/index.js";
+import { validationErrors, checkAuth, isProjectOwner } from "./utils/index.js";
 
 import cors from "cors";
 import multer from "multer";
@@ -28,14 +28,13 @@ app.get('/myProjects', checkAuth, userController.getAllUserProjects);
 
 
 //routers for project actions
-app.post('/projects/create', checkAuth, projectValidator, validationErrors, projectController.create);
-app.patch('/projects/:id', checkAuth, projectValidator, validationErrors, projectController.updateProject);
+app.post('/projects', checkAuth, projectValidator, validationErrors, projectController.create);
+app.patch('/projects/:id', checkAuth, isProjectOwner, projectValidator, validationErrors, projectController.updateProject);
 app.get('/projects/:id', projectController.getOneProject);
 app.get('/home', projectController.getAllProjects);
 app.delete('/projects/:id', checkAuth, projectController.deleteProject);
 
 //upload image
-
 app.use('/uploadImg', express.static('uploadImg'));
 
 const storage = multer.diskStorage({
@@ -51,7 +50,7 @@ const upload = multer({ storage });
 
 app.post('/uploadImage', checkAuth, upload.single('image'), (req, res) => {
     res.json({
-        url: `/uploadImage/${req.file.originalname}`
+        url: `/uploadImg/${req.file.originalname}`
     });
 });
 
