@@ -9,7 +9,7 @@ import cors from "cors";
 import multer from "multer";
 
 mongoose.set('strictQuery', false);
-mongoose.connect('mongodb+srv://testestest:123qwe456@cluster3.poofvsm.mongodb.net/?retryWrites=true&w=majority').then(console.log('DB connected')).catch((err) => {console.log('DB error', err);})
+mongoose.connect(process.env.MONGODB_URI).then(console.log('DB connected')).catch((err) => {console.log('DB error', err);})
 
 const app = express();
 app.use(express.json());
@@ -56,7 +56,7 @@ app.post('/uploadImage', checkAuth, upload.single('image'), (req, res) => {
 
 
 
-app.listen(4000, (err) => {
+app.listen(process.env.PORT || 4000, (err) => {
     if(err) {
         return console.log(err);
     }
