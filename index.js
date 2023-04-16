@@ -54,7 +54,7 @@ const upload = multer({ storage });
 
 app.post('/uploadImage', checkAuth, upload.single('image'), (req, res) => {
     res.json({
-        url: `/uploadImg/${req.file.originalname}`
+        url: `uploadImg/${req.file.originalname}`
     });
 });
 
