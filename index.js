@@ -8,6 +8,9 @@ import { validationErrors, checkAuth, isProjectOwner } from "./utils/index.js";
 
 import cors from "cors";
 import multer from "multer";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 mongoose.set('strictQuery', false);
 mongoose.connect(process.env.MONGODB_URI).then(console.log('DB connected')).catch((err) => {console.log('DB error', err);})
@@ -17,7 +20,6 @@ app.use(express.json());
 app.use(cors());
 
 
-
 //user information
 app.post('/auth/register', registerValidator, validationErrors, userController.register);
 app.post('/auth/login', loginValidator, validationErrors, userController.login);
@@ -25,7 +27,6 @@ app.get('/users/me', checkAuth, userController.getMe);
 app.patch('/users/update', checkAuth, userController.update);
 app.delete('/users/delete', checkAuth, userController.deleteUser);
 app.get('/myProjects', checkAuth, userController.getAllUserProjects);
-
 
 
 //routers for project actions
@@ -57,7 +58,6 @@ app.post('/uploadImage', checkAuth, upload.single('image'), (req, res) => {
         url: `uploadImg/${req.file.originalname}`
     });
 });
-
 
 
 app.listen(process.env.PORT || 4000, (err) => {
