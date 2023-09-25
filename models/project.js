@@ -19,7 +19,6 @@ const projectSchema = new mongoose.Schema({
     },
     poster: {
         type: String,
-        required: true,
     },
     acceptedCurrencies: {
         type: String,
